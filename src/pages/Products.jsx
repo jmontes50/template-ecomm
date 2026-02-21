@@ -18,6 +18,18 @@ export const Products = () => {
   const { data, loading, error } = useGetAxios(URL);
   console.table(data);
 
+  if(loading) {
+    return <h2 className='text-lg'>
+      Cargando ...
+    </h2>
+  }
+
+  if(error) {
+    <h2 className='text-lg'>
+      Ocurrio un error...
+    </h2>
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Catálogo de Productos</h1>
