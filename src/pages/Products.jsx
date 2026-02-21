@@ -16,7 +16,7 @@ export const Products = () => {
   const URL = "https://minimal-product-api.onrender.com/api/products";
 
   const { data, loading, error } = useGetAxios(URL);
-  console.table(data);
+  // console.table(data);
 
   if(loading) {
     return <h2 className='text-lg'>
@@ -62,6 +62,14 @@ export const Products = () => {
       </div>
       {/* añadimos una verificación para que se renderice de forma condicional ProductList */}
       {data ? (<ProductList products={data.data} />) : null}
+      <div className='flex justify-between mt-6'>
+        <button className='btn btn-primary'>
+          Ver menos
+        </button>
+        <button className='btn btn-primary'>
+          Ver más
+        </button>
+      </div>
     </div>
   );
 };
