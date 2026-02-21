@@ -18,12 +18,16 @@ export const Products = () => {
 
   const URL = `https://minimal-product-api.onrender.com/api/products?page=${page}&limit=9`;
 
+  const previousPage = () => {
+    setPage(page - 1)
+  }
+
   const nextPage = () => {
     setPage(page + 1);
   }
 
   const { data, loading, error } = useGetAxios(URL);
-  // console.table(data);
+  console.log(data);
 
   if(loading) {
     return <h2 className='text-lg'>
@@ -70,11 +74,11 @@ export const Products = () => {
       {/* añadimos una verificación para que se renderice de forma condicional ProductList */}
       {data ? (<ProductList products={data.data} />) : null}
       <div className='flex justify-between mt-6'>
-        <button className='btn btn-primary'>
-          Ver menos
+        <button className='btn btn-primary' onClick={previousPage} disabled={page === 1}>
+          Anterior
         </button>
-        <button className='btn btn-primary' onClick={nextPage}>
-          Ver más
+        <button className='btn btn-primary' onClick={nextPage} disabled={page === data.pagination.totalPages}>
+          Siguiente
         </button>
       </div>
     </div>
