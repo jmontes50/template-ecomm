@@ -14,6 +14,7 @@ const Register = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     try {
+      //createUserWithEmailAndPassword recibe como argumentos el objeto de autenticación, el email y la contraseña
       const credential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('User registered:', credential.user);
     } catch (error) {
