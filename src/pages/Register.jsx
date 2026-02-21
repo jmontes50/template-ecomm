@@ -1,16 +1,24 @@
 import { useRef } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/configFirebase';
 
 const Register = () => {
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     console.log('Email:', email);
     console.log('Password:', password);
+    try {
+      const credential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User registered:', credential.user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
