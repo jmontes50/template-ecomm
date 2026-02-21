@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
 export const AuthButtons = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,9 +28,9 @@ export const AuthButtons = () => {
       <button onClick={handleLogin} className="btn btn-sm btn-primary">
         Login
       </button>
-      <button className="btn btn-sm btn-ghost">
+      <Link to="/register" className="btn btn-sm btn-ghost">
         Register
-      </button>
+      </Link>
     </div>
   );
 };
