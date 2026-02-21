@@ -60,8 +60,8 @@ export const Products = () => {
           </select>
         </div>
       </div>
-
-      <ProductList products={products} />
+      {/* añadimos una verificación para que se renderice de forma condicional ProductList */}
+      {data ? (<ProductList products={data.data} />) : null}
     </div>
   );
 };

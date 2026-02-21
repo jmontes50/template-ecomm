@@ -1,6 +1,7 @@
 import { ProductCard } from './ProductCard';
 
 export const ProductList = ({ products }) => {
+  console.log("List", products)
   if (products.length === 0) {
     return (
       <div className="text-center py-12">
