@@ -74,10 +74,17 @@ export const Products = () => {
       {/* añadimos una verificación para que se renderice de forma condicional ProductList */}
       {data ? (<ProductList products={data.data} />) : null}
       <div className='flex justify-between mt-6'>
-        <button className='btn btn-primary' onClick={previousPage} disabled={page === 1}>
+        <button
+        className='btn btn-primary'
+        onClick={previousPage}
+        disabled={page === 1}
+        >
           Anterior
         </button>
-        <button className='btn btn-primary' onClick={nextPage} disabled={page === data.pagination.totalPages}>
+        <button
+        className='btn btn-primary'
+        onClick={nextPage}
+        disabled={page === data.pagination.totalPages}>
           Siguiente
         </button>
       </div>
