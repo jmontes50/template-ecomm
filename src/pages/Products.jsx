@@ -5,18 +5,19 @@ import useGetAxios from '../hooks/useAxios';
 
 export const Products = () => {
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("");
 
   const { products, filter, setFilter, categories } = useProducts();
 
-  const handleCategoryChange = (e) => {
-    setFilter({ ...filter, category: e.target.value });
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value)
   };
 
   const handleSearchChange = (e) => {
     setFilter({ ...filter, searchText: e.target.value });
   };
 
-  const URL = `https://minimal-product-api.onrender.com/api/products?page=${page}&limit=9`;
+  const URL = `https://minimal-product-api.onrender.com/api/products?page=${page}&limit=9&category=${category}`;
   const URL_CATEGORIES = `https://minimal-product-api.onrender.com/api/categories`;
 
   const previousPage = () => {
@@ -66,7 +67,7 @@ export const Products = () => {
         <div className="form-control w-full md:w-auto">
           <select
             className="select select-bordered w-full md:w-64"
-            value={filter.category}
+            value={category}
             onChange={handleCategoryChange}
           >
             <option value="">Todas las categorías</option>
