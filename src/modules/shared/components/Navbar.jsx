@@ -5,6 +5,10 @@ import { AuthButtons } from '../../auth/components/AuthButtons';
 export const Navbar = () => {
   const itemCount = useCartStore((state) => state.getItemCount());
 
+  const handleTheme = (event) => {
+    console.log(event.target.checked)
+  }
+
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
@@ -33,7 +37,7 @@ export const Navbar = () => {
         </div>
         <Link to="/" className="btn btn-ghost text-xl">E-Commerce</Link>
       </div>
-      
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li><Link to="/">Home</Link></li>
@@ -41,10 +45,13 @@ export const Navbar = () => {
           <li><Link to="/cart">Carrito</Link></li>
         </ul>
       </div>
-      
+
       <div className="navbar-end gap-2">
+
+        <input type="checkbox" onChange={handleTheme} className="toggle" />
+
         <AuthButtons />
-        
+
         <Link to="/cart" className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
