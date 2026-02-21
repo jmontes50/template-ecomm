@@ -1,12 +1,24 @@
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../../store/cartStore';
 import { AuthButtons } from '../../auth/components/AuthButtons';
+import useThemeStore from "../../../store/themeStore.js"
 
 export const Navbar = () => {
   const itemCount = useCartStore((state) => state.getItemCount());
 
+  const { theme, changeTheme } = useThemeStore();
+
+  const isDark = "dark" === theme; //booleano
+
   const handleTheme = (event) => {
-    console.log(event.target.checked)
+    // console.log(event.target.checked)
+    let newTheme;
+    if(event.target.checked){
+      newTheme = "dark"
+    } else {
+      newTheme = "light"
+    }
+    changeTheme(newTheme);
   }
 
   return (
@@ -48,7 +60,7 @@ export const Navbar = () => {
 
       <div className="navbar-end gap-2">
 
-        <input type="checkbox" onChange={handleTheme} className="toggle" />
+        <input type="checkbox" onChange={handleTheme} className="toggle" checked={isDark}/>
 
         <AuthButtons />
 
