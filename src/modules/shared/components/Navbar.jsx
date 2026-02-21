@@ -4,7 +4,9 @@ import { AuthButtons } from '../../auth/components/AuthButtons';
 import useThemeStore from "../../../store/themeStore.js"
 
 export const Navbar = () => {
-  const itemCount = useCartStore((state) => state.getItemCount());
+  // const itemCount = useCartStore((state) => state.getItemCount());
+  const { getItemCount } = useCartStore();
+  const itemCount = getItemCount();
 
   const { theme, changeTheme } = useThemeStore();
 
