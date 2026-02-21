@@ -70,9 +70,9 @@ export const Products = () => {
             onChange={handleCategoryChange}
           >
             <option value="">Todas las categorías</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
+            {dataCategories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>
