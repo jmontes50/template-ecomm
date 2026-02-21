@@ -17,6 +17,7 @@ export const Products = () => {
   };
 
   const URL = `https://minimal-product-api.onrender.com/api/products?page=${page}&limit=9`;
+  const URL_CATEGORIES = `https://minimal-product-api.onrender.com/api/categories`;
 
   const previousPage = () => {
     setPage(page - 1)
@@ -27,15 +28,21 @@ export const Products = () => {
   }
 
   const { data, loading, error } = useGetAxios(URL);
-  console.log(data);
+  // console.log(data);
+  const {
+    data: dataCategories, //estamos indicando que cada propiedad tendrá un diferente nombre
+    loading: loadingCategories,
+    error: errCategories,
+  } = useGetAxios(URL_CATEGORIES);
+  // console.log(dataCategories, loadingCategories, errCategories);
 
-  if(loading) {
+  if(loading || loadingCategories) {
     return <h2 className='text-lg'>
       Cargando ...
     </h2>
   }
 
-  if(error) {
+  if(error || errCategories) {
     <h2 className='text-lg'>
       Ocurrio un error...
     </h2>
