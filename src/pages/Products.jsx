@@ -15,7 +15,7 @@ export const Products = () => {
 
   const URL = "https://minimal-product-api.onrender.com/api/products";
 
-  const { data } = useGetAxios(URL);
+  const { data, loading, error } = useGetAxios(URL);
   console.table(data);
 
   return (
