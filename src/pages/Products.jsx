@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useProducts } from '../modules/products/hooks/useProducts';
 import { ProductList } from '../modules/products/components/ProductList';
 import useGetAxios from '../hooks/useAxios';
 
 export const Products = () => {
+  const [page, setPage] = useState(1);
+
   const { products, filter, setFilter, categories } = useProducts();
 
   const handleCategoryChange = (e) => {
@@ -13,7 +16,11 @@ export const Products = () => {
     setFilter({ ...filter, searchText: e.target.value });
   };
 
-  const URL = "https://minimal-product-api.onrender.com/api/products";
+  const URL = `https://minimal-product-api.onrender.com/api/products?page=${page}&limit=9`;
+
+  const nextPage = () => {
+    setPage(page + 1);
+  }
 
   const { data, loading, error } = useGetAxios(URL);
   // console.table(data);
@@ -66,7 +73,7 @@ export const Products = () => {
         <button className='btn btn-primary'>
           Ver menos
         </button>
-        <button className='btn btn-primary'>
+        <button className='btn btn-primary' onClick={nextPage}>
           Ver más
         </button>
       </div>
