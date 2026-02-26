@@ -1,22 +1,15 @@
-import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 export const AuthButtons = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  const { isLoggedIn } = useAuthStore();
 
   if (isLoggedIn) {
     return (
       <div className="flex items-center gap-2">
         <span className="text-sm">Usuario Demo</span>
-        <button onClick={handleLogout} className="btn btn-sm btn-outline">
+        <button className="btn btn-sm btn-outline">
           Logout
         </button>
       </div>
@@ -25,9 +18,9 @@ export const AuthButtons = () => {
 
   return (
     <div className="flex gap-2">
-      <button onClick={handleLogin} className="btn btn-sm btn-primary">
+      <Link to="/login" className="btn btn-sm btn-primary">
         Login
-      </button>
+      </Link>
       <Link to="/register" className="btn btn-sm btn-ghost">
         Register
       </Link>
