@@ -6,7 +6,7 @@ import { signOut } from "firebase/auth";
 
 export const AuthButtons = () => {
 
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, user } = useAuthStore();
 
   const handleLogout = async () => {
     try {
@@ -20,7 +20,7 @@ export const AuthButtons = () => {
   if (isLoggedIn) {
     return (
       <div className="flex items-center gap-2">
-        <span className="text-sm">Usuario Demo</span>
+        <span className="text-sm">{user?.email}</span>
         <button onClick={handleLogout} className="btn btn-sm btn-outline">
           Logout
         </button>
