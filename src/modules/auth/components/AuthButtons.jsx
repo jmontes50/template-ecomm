@@ -1,15 +1,27 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../store/useAuthStore";
+import { toast } from "react-toastify";
+import { auth } from "../../../config/configFirebase";
+import { signOut } from "firebase/auth";
 
 export const AuthButtons = () => {
 
   const { isLoggedIn } = useAuthStore();
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast.success('Logged out successfully!', { theme: "dark" });
+    } catch (error) {
+      toast("Error logging out: " + error.message, { type: "error", autoClose: 5000, theme: "dark" });
+    }
+  };
+
   if (isLoggedIn) {
     return (
       <div className="flex items-center gap-2">
         <span className="text-sm">Usuario Demo</span>
-        <button className="btn btn-sm btn-outline">
+        <button onClick={handleLogout} className="btn btn-sm btn-outline">
           Logout
         </button>
       </div>
