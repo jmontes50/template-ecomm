@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Layout } from './modules/shared/components/Layout';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Layout>
+      <ToastContainer />
     </BrowserRouter>
   );
 };
