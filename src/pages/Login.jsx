@@ -18,11 +18,11 @@ const Login = () => {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('User signed in:', userCredential.user);
+      // console.log('User signed in:', userCredential.user);
       toast.success('Logged in successfully!', { theme: "dark" });
       navigate('/'); // Redirige al usuario a la página de inicio después de iniciar sesión
     } catch (error) {
-      console.error('Error signing in:', error);
+      // console.error('Error signing in:', error);
       toast("Error logging in: " + error.message, { type: "error", autoClose: 5000, theme: "dark" });
     }
   };

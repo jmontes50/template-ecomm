@@ -9,6 +9,7 @@ export const useAuthStore = create((set) => ({
 
   startAuthListener: () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log( user );
       if (user) {
         set({ user, isLoggedIn: true, error: null });
       } else {

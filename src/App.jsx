@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useAuthStore } from './store/useAuthStore';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Layout } from './modules/shared/components/Layout';
@@ -8,6 +10,17 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 const App = () => {
+
+  const { startAuthListener } = useAuthStore();
+
+  useEffect(() => {
+    const unsubscribe = startAuthListener();
+    return () => {
+      unsubscribe(); // Limpia el listener de autenticación al desmontar el componente
+      //prevenir fugas de memoría
+    };
+  }, [startAuthListener]);
+
   return (
     <BrowserRouter>
       <Layout>
