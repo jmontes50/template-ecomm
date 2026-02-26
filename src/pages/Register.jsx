@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/configFirebase';
+import { toast } from 'react-toastify';
 
 const Register = () => {
 
@@ -16,8 +17,11 @@ const Register = () => {
     try {
       //createUserWithEmailAndPassword recibe como argumentos el objeto de autenticación, el email y la contraseña
       const credential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User registered:', credential.user);
+      // console.log('User registered:', credential.user);
+      //usando método .success de react-toastify para mostrar un mensaje de éxito
+      toast.success('User registered successfully!', { theme: "dark" });
     } catch (error) {
+      toast("Error registering user: " + error.message, { type: "error", autoClose: 5000, theme: "dark" });
       console.log(error);
     }
   }
