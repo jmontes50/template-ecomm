@@ -1,19 +1,30 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/configFirebase';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    console.log('Login attempt:', { email, password });
-
-    // TODO: Implement Firebase authentication here
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User signed in:', userCredential.user);
+      toast.success('Logged in successfully!', { theme: "dark" });
+      navigate('/'); // Redirige al usuario a la página de inicio después de iniciar sesión
+    } catch (error) {
+      console.error('Error signing in:', error);
+      toast("Error logging in: " + error.message, { type: "error", autoClose: 5000, theme: "dark" });
+    }
   };
 
   return (
