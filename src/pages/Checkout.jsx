@@ -67,6 +67,40 @@ const Checkout = () => {
               </p>
             )}
         </div>
+        <div className='mb-2'>
+          <label className="block text-sm font-medium mb-1">
+            Teléfono
+          </label>
+          <input
+            type="tel"
+            className="input w-full"
+            {...register("phone", {
+              required: "Este campo es obligatorio",
+            })}
+          />
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.phone.message}
+              </p>
+            )}
+        </div>
+        <div className='mb-2'>
+          <label className="block text-sm font-medium mb-1">
+            Dirección de Envío
+          </label>
+          <input
+            type="text"
+            className="input w-full"
+            {...register("address", {
+              required: "Este campo es obligatorio",
+            })}
+          />
+            {errors.address && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.address.message}
+              </p>
+            )}
+        </div>
         <button className="btn btn-primary" type="submit">
             Guardar Información
         </button>
