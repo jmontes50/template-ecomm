@@ -43,10 +43,33 @@ const Checkout = () => {
                 {errors.fullName.message}
               </p>
             )}
-          <button className="btn btn-primary" type="submit">
-            Guardar Información
-          </button>
+
         </div>
+        <div className='mb-2'>
+          <label className="block text-sm font-medium mb-1">
+            Correo Electrónico
+          </label>
+          <input
+            type="email"
+            className="input w-full"
+            {...register("email", {
+              required: "Este campo es obligatorio",
+              //pattern, se encarga de validar el formato del correo electrónico utilizando una expresión regular
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Correo electrónico inválido",
+              },
+            })}
+          />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+        </div>
+        <button className="btn btn-primary" type="submit">
+            Guardar Información
+        </button>
       </form>
       <div className="mt-6"></div>
     </div>
