@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
 
@@ -24,10 +24,25 @@ const Checkout = () => {
         setPosition([lat, lng]);
       },
     });
+
+    if(coords) {
+      map.setView(coords, map.getZoom());
+      // map.flyTo(coords, map.getZoom());
+    }
     return <>
       { position ? <Marker position={position} /> : null }
     </>
   };
+
+  useEffect(() => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        const { latitude, longitude } = position.coords;
+        setCoords([latitude, longitude]);
+      })
+    }
+  }, []);
 
   return (
     <div>
@@ -130,7 +145,7 @@ const Checkout = () => {
         {/* leaflet */}
         <div className='col-span-1 h-105'>
           {/* para las coordenadas en general leaflet usa latitud y longitud */}
-          <MapContainer center={[-12.08385, -77.02832]} zoom={13} className="h-full w-full">
+          <MapContainer center={coords} zoom={13} className="h-full w-full">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
