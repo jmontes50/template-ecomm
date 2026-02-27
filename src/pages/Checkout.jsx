@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
 
 const Checkout = () => {
   //el handleSubmit se encarga de validar el formulario y llamar a onSubmit si todo es correcto
@@ -9,6 +9,16 @@ const Checkout = () => {
   const onSubmit = (data) => {
     console.log(data);
   }
+
+  //vamos a crear un pequeño componente para manejar los eventos del mapa y obtener las coordenadas del lugar donde el usuario hace clic
+  const LocationMarker = () => {
+    const map = useMapEvents({
+      click(e) {
+        console.log(e.latlng);
+      },
+    });
+    return <></>
+  };
 
   return (
     <div>
@@ -110,11 +120,14 @@ const Checkout = () => {
         </form>
         {/* leaflet */}
         <div className='col-span-1 h-105'>
+          {/* para las coordenadas en general leaflet usa latitud y longitud */}
           <MapContainer center={[-12.08385, -77.02832]} zoom={13} className="h-full w-full">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
+            {/* <Marker position={[-12.08385, -77.02832]} /> */}
+            <LocationMarker />
           </MapContainer>
         </div>
       </div>
