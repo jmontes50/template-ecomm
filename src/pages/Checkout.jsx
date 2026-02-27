@@ -12,25 +12,45 @@ const Checkout = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-      <p className="text-gray-600">Aquí puedes revisar tu pedido y proceder al pago.</p>
-      <form className='mb-3' onSubmit={handleSubmit(onSubmit)}>
+      <p className="text-gray-600">
+        Aquí puedes revisar tu pedido y proceder al pago.
+      </p>
+      <form className="mb-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-2">
-          <label className="block text-sm font-medium mb-1">Nombre Completo</label>
+          <label className="block text-sm font-medium mb-1">
+            Nombre Completo
+          </label>
           <input
             type="text"
-            className='input w-full'
+            className="input w-full"
             //el register se encarga de registrar el input en el formulario y aplicar las validaciones
-            {...register("fullName", { required: true })}
+            // {...register("fullName", { required: true, minLength: 3, maxLength: 50 })}
+            {...register("fullName", {
+              required: "Este campo es obligatorio",
+              minLength: {
+                value: 3,
+                message: "El nombre debe tener al menos 3 caracteres",
+              },
+              maxLength: {
+                value: 50,
+                message: "El nombre no debe exceder los 50 caracteres",
+              },
+            })}
           />
-
-          <button className="btn btn-primary" type="submit">Guardar Información</button>
+            {errors.fullName && (
+              // preguntamos si hay un error en el campo fullName y mostramos el mensaje de error correspondiente
+              <p className="text-red-500 text-sm mt-1">
+                {errors.fullName.message}
+              </p>
+            )}
+          <button className="btn btn-primary" type="submit">
+            Guardar Información
+          </button>
         </div>
       </form>
-      <div className="mt-6">
-
-      </div>
+      <div className="mt-6"></div>
     </div>
-  )
+  );
 }
 
 export default Checkout
