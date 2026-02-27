@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
 
 const Checkout = () => {
+  //coords va a manejar el centro del mapa es necesario que tenga un valor inicial para que el mapa se muestre
+  //position va a manejar la posición del marcador, inicialmente es null porque no hay ningún marcador
+  const [coords, setCoords] = useState([-12.08385, -77.02832]);
+  const [position, setPosition] = useState(null);
   //el handleSubmit se encarga de validar el formulario y llamar a onSubmit si todo es correcto
-
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
@@ -14,10 +18,15 @@ const Checkout = () => {
   const LocationMarker = () => {
     const map = useMapEvents({
       click(e) {
-        console.log(e.latlng);
+        // console.log(e.latlng);
+        const { lat, lng } = e.latlng;
+        setCoords([lat, lng]);
+        setPosition([lat, lng]);
       },
     });
-    return <></>
+    return <>
+      { position ? <Marker position={position} /> : null }
+    </>
   };
 
   return (
