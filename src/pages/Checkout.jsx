@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { MapContainer, TileLayer } from 'react-leaflet'
 
 const Checkout = () => {
   //el handleSubmit se encarga de validar el formulario y llamar a onSubmit si todo es correcto
@@ -16,6 +17,7 @@ const Checkout = () => {
         Aquí puedes revisar tu pedido y proceder al pago.
       </p>
       <div className='mt-4 grid-cols-1 md:grid-cols-2 gap-4 grid'>
+        {/* form */}
         <form className="mb-3 col-span-1" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-2">
           <label className="block text-sm font-medium mb-1">
@@ -106,7 +108,18 @@ const Checkout = () => {
             Guardar Información
         </button>
         </form>
+        {/* leaflet */}
+        <div className='col-span-1 h-105'>
+          <MapContainer center={[-12.08385, -77.02832]} zoom={13} className="h-full w-full">
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+          </MapContainer>
+        </div>
       </div>
+
+
 
       <div className="mt-6"></div>
     </div>
