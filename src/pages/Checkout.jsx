@@ -15,7 +15,8 @@ const Checkout = () => {
       <p className="text-gray-600">
         Aquí puedes revisar tu pedido y proceder al pago.
       </p>
-      <form className="mb-3" onSubmit={handleSubmit(onSubmit)}>
+      <div className='mt-4 grid-cols-1 md:grid-cols-2 gap-4 grid'>
+        <form className="mb-3 col-span-1" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-2">
           <label className="block text-sm font-medium mb-1">
             Nombre Completo
@@ -104,7 +105,9 @@ const Checkout = () => {
         <button className="btn btn-primary" type="submit">
             Guardar Información
         </button>
-      </form>
+        </form>
+      </div>
+
       <div className="mt-6"></div>
     </div>
   );
