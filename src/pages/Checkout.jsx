@@ -75,9 +75,9 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-      <p className="text-gray-600">
+      <p className="text-black dark:text-gray-600">
         Aquí puedes revisar tu pedido y proceder al pago.
       </p>
       <div className="mt-4 grid-cols-1 md:grid-cols-2 gap-4 grid">
@@ -171,6 +171,10 @@ const Checkout = () => {
         </form>
         {/* leaflet */}
         <div className="col-span-1 h-105">
+          <p className="text-black dark:text-gray-600 mb-2">
+            Selecciona tu ubicación en el mapa o busca tu dirección para facilitar
+            la entrega.
+          </p>
           {/* para las coordenadas en general leaflet usa latitud y longitud */}
           <MapContainer center={coords} zoom={13} className="h-full w-full">
             <TileLayer
