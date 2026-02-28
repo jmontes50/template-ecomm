@@ -47,6 +47,8 @@ export const Navbar = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/products">Productos</Link></li>
             <li><Link to="/cart">Carrito</Link></li>
+            <li><Link to="/checkout">Checkout</Link></li>
+            <li><Link to="/orders">Mis Pedidos</Link></li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">E-Commerce</Link>
@@ -57,6 +59,8 @@ export const Navbar = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/products">Productos</Link></li>
           <li><Link to="/cart">Carrito</Link></li>
+          <li><Link to="/checkout">Checkout</Link></li>
+          <li><Link to="/orders">Mis Pedidos</Link></li>
         </ul>
       </div>
 
