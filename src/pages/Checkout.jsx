@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet-control-geocoder";
 import { useCartStore } from "../store/cartStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 const Checkout = () => {
   //coords va a manejar el centro del mapa es necesario que tenga un valor inicial para que el mapa se muestre
@@ -18,6 +19,8 @@ const Checkout = () => {
   } = useForm();
 
   const { items, getTotal } = useCartStore();
+  const { user } = useAuthStore();
+  console.log(user.uid)
 
   const onSubmit = (data) => {
     const orderData = {
