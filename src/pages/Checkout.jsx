@@ -5,6 +5,8 @@ import L from "leaflet";
 import "leaflet-control-geocoder";
 import { useCartStore } from "../store/cartStore";
 import { useAuthStore } from "../store/useAuthStore";
+import { db } from "../config/configFirebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const Checkout = () => {
   //coords va a manejar el centro del mapa es necesario que tenga un valor inicial para que el mapa se muestre
@@ -21,7 +23,7 @@ const Checkout = () => {
   const { items, getTotal } = useCartStore();
   const { user } = useAuthStore();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const orderData = {
       ...data,
       items,
@@ -32,7 +34,13 @@ const Checkout = () => {
       },
       userId: user ? user.uid : null,
     };
-    console.log(orderData);
+    // console.log(orderData);
+    try {
+      const docRef = await addDoc(collection(db, "orders"), orderData);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
 
   let map = null;
