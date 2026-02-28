@@ -9,6 +9,7 @@ import { Cart } from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 import ProtectedRoute from './modules/auth/components/ProtectedRoute';
 
 const App = () => {
@@ -37,9 +38,10 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         </Routes>
       </Layout>
       <ToastContainer />
