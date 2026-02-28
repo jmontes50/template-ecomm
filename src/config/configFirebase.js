@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Referencia al módulo de autenticación de Firebase
 const auth = getAuth(app);
-
+//Referencia a la base de datos Firestore de Firebase, que se utiliza para almacenar y sincronizar datos en tiempo real entre los clientes y el servidor.
 const db = getFirestore(app);
 
 export default app;

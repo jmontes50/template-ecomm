@@ -1,4 +1,5 @@
 import { useCartStore } from '../store/cartStore';
+import { Link } from 'react-router-dom';
 
 export const Cart = () => {
   const items = useCartStore((state) => state.items);
@@ -92,9 +93,9 @@ export const Cart = () => {
                   <span>${getTotal().toFixed(2)}</span>
                 </div>
               </div>
-              <button className="btn btn-primary mt-4">
+              <Link to="/checkout" className="btn btn-primary mt-4 w-full">
                 Proceder al Pago
-              </button>
+              </Link>
             </div>
           </div>
         </div>
