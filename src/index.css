@@ -2,3 +2,16 @@
 @plugin "daisyui" {
     themes: light --default, dark --prefersdark;
 }
+
+.leaflet-control-geocoder input {
+    color: #000 !important;
+    background-color: #fff !important;
+}
+
+.leaflet-control-geocoder-alternatives {
+    background-color: #fff !important;
+}
+
+.leaflet-control-geocoder-alternatives a {
+    color: #000 !important;
+}

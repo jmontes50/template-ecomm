@@ -50,10 +50,15 @@ const Checkout = () => {
         .on("markgeocode", function (e) {
           const latlng = e.geocode.center;
           console.log(latlng);
-          // setCoords([latlng.lat, latlng.lng]);
-          // setPosition([latlng.lat, latlng.lng]);
+          setCoords([latlng.lat, latlng.lng]);
+          setPosition([latlng.lat, latlng.lng]);
         })
         .addTo(map);
+
+        //removiendo el control de geocodificación cuando el componente se desmonta para evitar problemas de memoria
+      return () => {
+        map.removeControl(geocoder);
+      };
     }, [map]);
 
     return null;
