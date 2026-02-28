@@ -20,7 +20,6 @@ const Checkout = () => {
 
   const { items, getTotal } = useCartStore();
   const { user } = useAuthStore();
-  console.log(user.uid)
 
   const onSubmit = (data) => {
     const orderData = {
@@ -31,6 +30,7 @@ const Checkout = () => {
         lat: coords[0],
         lng: coords[1],
       },
+      userId: user ? user.uid : null,
     };
     console.log(orderData);
   };
