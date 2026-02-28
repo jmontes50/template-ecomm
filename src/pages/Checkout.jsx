@@ -7,6 +7,7 @@ import { useCartStore } from "../store/cartStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { db } from "../config/configFirebase";
 import { collection, addDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   //coords va a manejar el centro del mapa es necesario que tenga un valor inicial para que el mapa se muestre
@@ -37,7 +38,8 @@ const Checkout = () => {
     // console.log(orderData);
     try {
       const docRef = await addDoc(collection(db, "orders"), orderData);
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
+      toast.success("Pedido registrado con éxito");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
