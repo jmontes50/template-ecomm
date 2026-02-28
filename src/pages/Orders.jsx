@@ -30,7 +30,45 @@ const Orders = () => {
   }, []);
 
   return (
-    <div>Orders</div>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Mis Pedidos</h1>
+      {orders.length === 0 ? (
+        <p className="text-lg">No tienes pedidos aún.</p>
+      ) : (
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th className="px-4 py-2">Nombre</th>
+              <th className="px-4 py-2">Total</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Phone</th>
+              <th className="px-4 py-2">Dirección</th>
+              <th className="px-4 py-2">Items</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.id} className="border-t">
+                <td className="px-4 py-2">{order.fullName}</td>
+                <td className="px-4 py-2">S/ {order.total.toFixed(2)}</td>
+                <td className="px-4 py-2">{order.email}</td>
+                <td className="px-4 py-2">{order.phone}</td>
+                <td className="px-4 py-2">{order.address}</td>
+                <td className="px-4 py-2">
+                  <ul>
+                    {order.items.map((item, index) => (
+                      <li key={index}>
+                        {item.name} x {item.quantity} x S/ {item.price.toFixed(2)}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   )
 }
 
