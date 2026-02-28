@@ -38,10 +38,24 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Layout>
       <ToastContainer />
