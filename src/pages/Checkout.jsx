@@ -6,7 +6,7 @@ import "leaflet-control-geocoder";
 import { useCartStore } from "../store/cartStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { db } from "../config/configFirebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, endAt } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
@@ -14,6 +14,7 @@ const Checkout = () => {
   //position va a manejar la posición del marcador, inicialmente es null porque no hay ningún marcador
   const [coords, setCoords] = useState([-12.08385, -77.02832]);
   const [position, setPosition] = useState(null);
+  const [file, setFile] = useState(null);
   //el handleSubmit se encarga de validar el formulario y llamar a onSubmit si todo es correcto
   const {
     register,
@@ -23,6 +24,11 @@ const Checkout = () => {
 
   const { items, getTotal } = useCartStore();
   const { user } = useAuthStore();
+
+  const handleInputFileChange = (ev) => {
+    console.log(ev.target.files[0]);
+    setFile(ev.target.files[0]);
+  }
 
   const onSubmit = async (data) => {
     const orderData = {
@@ -194,8 +200,9 @@ const Checkout = () => {
             <label className="block text-sm font-medium mb-1">Voucher</label>
             <input
               type="file"
-              onChange={() => {}}
+              onChange={handleInputFileChange}
               className="file-input w-full"
+              multiple={false}
             />
           </div>
           <button className="btn btn-primary" type="submit">
