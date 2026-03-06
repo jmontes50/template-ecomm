@@ -30,13 +30,20 @@ const Checkout = () => {
     //obtenemos la extensión del archivo para poder guardarlo con el mismo formato en supabase
   const extension = file.name.split(".").pop();
 
+  const fileName = `checkout-file-${Date.now()}.${extension}`;
+
   const { data, error } = await supabase.storage
     .from("Archivos") //indica de donde se va a subir el archivo, en este caso de la carpeta "Archivos"
-    .upload(`checkout-file-${Date.now()}.${extension}`, file, {
+    .upload(fileName, file, {
       cacheControl: "3600",
       upsert: false,
     });
-    console.log({ data, error });
+    // console.log({ data, error });
+    const { data: publicURLData } = supabase.storage
+    .from("Archivos") //bucket
+    .getPublicUrl(fileName); //la ruta del archivo que queremos obtener la URL pública
+    //getPublicUrl me da la Url en la propiedad publicUrl
+    return publicURLData.publicUrl;
   };
 
   const handleInputFileChange = (ev) => {
