@@ -54,7 +54,11 @@ const Checkout = () => {
 
 
   const onSubmit = async (data) => {
-    const orderData = {
+    try {
+      //1. subir el archivo a supabase storage y obtener la URL pública
+      const url = await handleStorageUpload(file);
+      //2. construir el objeto con la información del pedido, incluyendo la URL del archivo subido
+      const orderData = {
       ...data,
       items,
       total: getTotal(),
@@ -63,11 +67,9 @@ const Checkout = () => {
         lng: coords[1],
       },
       userId: user ? user.uid : null,
+      imagen: url,
     };
-    // console.log(orderData);
-    try {
-      await handleStorageUpload(file);
-      return
+    //3. guardar el objeto en Firestore
       const docRef = await addDoc(collection(db, "orders"), orderData);
       // console.log("Document written with ID: ", docRef.id);
       toast.success("Pedido registrado con éxito");
