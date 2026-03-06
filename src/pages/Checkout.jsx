@@ -190,6 +190,14 @@ const Checkout = () => {
               </p>
             )}
           </div>
+          <div className="mb-2">
+            <label className="block text-sm font-medium mb-1">Voucher</label>
+            <input
+              type="file"
+              onChange={() => {}}
+              className="file-input w-full"
+            />
+          </div>
           <button className="btn btn-primary" type="submit">
             Guardar Información
           </button>
