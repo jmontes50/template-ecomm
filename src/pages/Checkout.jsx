@@ -8,6 +8,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { db } from "../config/configFirebase";
 import { collection, addDoc, endAt } from "firebase/firestore";
 import { toast } from "react-toastify";
+import supabase from "../config/configSupabase";
 
 const Checkout = () => {
   //coords va a manejar el centro del mapa es necesario que tenga un valor inicial para que el mapa se muestre
@@ -25,10 +26,22 @@ const Checkout = () => {
   const { items, getTotal } = useCartStore();
   const { user } = useAuthStore();
 
+  const handleStorageUpload = async (file) => {
+  const { data, error } = await supabase.storage
+    .from("Archivos") //indica de donde se va a subir el archivo, en este caso de la carpeta "Archivos"
+    .upload(`voucher-${Date.now()}.jpg`, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+    console.log({ data, error });
+  };
+
   const handleInputFileChange = (ev) => {
     console.log(ev.target.files[0]);
-    setFile(ev.target.files[0]);
-  }
+    // return
+    setFile(ev.target.files[0])
+  };
+
 
   const onSubmit = async (data) => {
     const orderData = {
@@ -43,6 +56,8 @@ const Checkout = () => {
     };
     // console.log(orderData);
     try {
+      await handleStorageUpload(file);
+      return
       const docRef = await addDoc(collection(db, "orders"), orderData);
       // console.log("Document written with ID: ", docRef.id);
       toast.success("Pedido registrado con éxito");
