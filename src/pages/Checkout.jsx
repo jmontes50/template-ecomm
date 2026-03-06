@@ -27,9 +27,12 @@ const Checkout = () => {
   const { user } = useAuthStore();
 
   const handleStorageUpload = async (file) => {
+    //obtenemos la extensión del archivo para poder guardarlo con el mismo formato en supabase
+  const extension = file.name.split(".").pop();
+
   const { data, error } = await supabase.storage
     .from("Archivos") //indica de donde se va a subir el archivo, en este caso de la carpeta "Archivos"
-    .upload(`voucher-${Date.now()}.jpg`, file, {
+    .upload(`checkout-file-${Date.now()}.${extension}`, file, {
       cacheControl: "3600",
       upsert: false,
     });
